@@ -1,0 +1,209 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Animation classes for About section */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease forwards;
+  opacity: 1;
+}
+
+/* Fallback styling to ensure content is visible */
+.animate-on-scroll {
+  transition: opacity 0.5s ease;
+}
+
+/* Make sure section content is visible */
+#about .container * {
+  opacity: 1 !important;
+}
+
+/* Timeline animations for Story section */
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(244, 166, 18, 0.7);
+  }
+  
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 8px rgba(244, 166, 18, 0);
+  }
+  
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(244, 166, 18, 0);
+  }
+}
+
+@keyframes timeline-grow {
+  from {
+    height: 0;
+  }
+  to {
+    height: 100%;
+  }
+}
+
+@keyframes fade-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Timeline line animation */
+#story .absolute.bg-gradient-to-b {
+  animation: none; /* Remove the automatic growth animation */
+  transform-origin: top;
+}
+
+/* Timeline gold dots pulse animation */
+.animate-pulse {
+  animation: pulse 2s infinite;
+}
+
+/* Mobile styles for Story section */
+@media (max-width: 768px) {
+  /* Remove the default mobile timeline styling that was causing problems */
+  #story .timeline-container {
+    position: relative;
+    padding-left: 0;
+  }
+  
+  /* Create a new vertical timeline for mobile */
+  #story .timeline-item {
+    position: relative;
+    padding-left: 2.5rem; 
+    margin-left: 1rem;
+  }
+  
+  /* Remove the continuous timeline line */
+  #story .timeline-container::before {
+    content: none;
+  }
+  
+  /* Add progressive timeline line for active items only */
+  #story .timeline-active::after {
+    content: "";
+    position: absolute;
+    left: 1rem;
+    top: 1.5rem;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #F4A612, rgba(244, 166, 18, 0.3));
+    z-index: 1;
+  }
+  
+  /* Remove line from the last active item */
+  #story .timeline-active:last-of-type::after {
+    content: none;
+  }
+  
+  /* Style active timeline dots for mobile */
+  #story .timeline-active::before {
+    content: "";
+    position: absolute;
+    left: 0.35rem;
+    top: 0;
+    width: 1.3rem;
+    height: 1.3rem;
+    background-color: #F4A612;
+    border-radius: 50%;
+    border: 2px solid #2A1A36;
+    box-shadow: 0 0 10px rgba(244, 166, 18, 0.7);
+    z-index: 2;
+    animation: fade-in-left 0.5s ease-out forwards;
+  }
+  
+  /* Style inactive timeline dots for mobile */
+  #story .timeline-inactive::before {
+    content: "";
+    position: absolute;
+    left: 0.35rem;
+    top: 0;
+    width: 1.3rem;
+    height: 1.3rem;
+    background-color: #888;
+    border-radius: 50%;
+    border: 2px solid #2A1A36;
+    z-index: 2;
+    opacity: 0.5;
+  }
+  
+  /* Add inner pulse to active timeline dots */
+  #story .timeline-active::after {
+    content: "";
+    position: absolute;
+    left: calc(0.35rem + 0.3rem);
+    top: 0.3rem;
+    width: 0.7rem;
+    height: 0.7rem;
+    background-color: #2A1A36;
+    border-radius: 50%;
+    z-index: 3;
+  }
+  
+  /* Add inner dot to inactive timeline dots */
+  #story .timeline-inactive::after {
+    content: "";
+    position: absolute;
+    left: calc(0.35rem + 0.3rem);
+    top: 0.3rem;
+    width: 0.7rem;
+    height: 0.7rem;
+    background-color: #2A1A36;
+    border-radius: 50%;
+    z-index: 3;
+    opacity: 0.5;
+  }
+  
+  /* Adjust spacing for mobile */
+  #story .timeline-item {
+    margin-bottom: 3rem;
+  }
+  
+  /* Inactive items - less opacity */
+  #story .timeline-inactive {
+    opacity: 0.7;
+  }
+  
+  /* Adjust font sizes for mobile */
+  #story .font-dancing.text-3xl {
+    font-size: 1.75rem;
+  }
+  
+  /* Text background for better legibility */
+  #story .bg-plum-900\/70 {
+    background-color: rgba(42, 26, 54, 0.85);
+    margin-top: 0.75rem;
+  }
+}
+
+/* Ensure fonts load properly - fallbacks */
+@font-face {
+  font-family: 'Dancing Script';
+  font-display: swap;
+  src: local('Dancing Script'), url(https://fonts.gstatic.com/s/dancingscript/v24/If2cXTr6YS-zF4S-kcSWSVi_sxjsohD9F50Ruu7BMSo3ROp6.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Quicksand';
+  font-display: swap;
+  src: local('Quicksand'), url(https://fonts.gstatic.com/s/quicksand/v30/6xKtdSZaM9iE8KbpRA_hK1QN.woff) format('woff');
+}
